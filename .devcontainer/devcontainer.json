@@ -1,0 +1,29 @@
+{
+  "name": "AutoShorts AI Studio",
+  "image": "mcr.microsoft.com/devcontainers/python:3.11",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts"
+    }
+  },
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y ffmpeg fonts-noto-cjk fonts-indic fonts-deva fonts-noto-color-emoji && pip install --no-cache-dir -r requirements.txt && (cd tools/bgutil-server && npm install || true)",
+  "postStartCommand": "nohup python app.py > app.log 2>&1 &",
+  "forwardPorts": [8000],
+  "portsAttributes": {
+    "8000": {
+      "label": "AutoShorts Web Dashboard",
+      "onAutoForward": "openBrowser",
+      "visibility": "public"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python"
+      },
+      "extensions": [
+        "ms-python.python"
+      ]
+    }
+  }
+}

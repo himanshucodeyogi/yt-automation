@@ -1,0 +1,6 @@
+# Netscape HTTP Cookie File
+# Export your logged-in YouTube cookies using Chrome extensions like:
+# 'Get cookies.txt LOCALLY' or 'Cookie-Editor'.
+# Save the exported cookies here as 'cookies.txt' or upload via the Web Dashboard.
+.youtube.com	TRUE	/	TRUE	1798000000	SAPISID	sample_value
+.youtube.com	TRUE	/	TRUE	1798000000	LOGIN_INFO	sample_value

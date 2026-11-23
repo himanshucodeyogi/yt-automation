@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+build/
+dist/
+*.egg-info/
+
+# Secret & Session Files (Never commit private keys or sessions)
+cookies.txt
+downloads/_active_cookies.txt
+client_secrets.json
+token.json
+.env
+youtube_accounts/*
+!youtube_accounts/.gitkeep
+
+# Large Media & Generated Video Files
+downloads/*
+!downloads/.gitkeep
+output/*
+!output/.gitkeep
+
+# Node modules (will be installed by postCreateCommand / start.sh)
+tools/bgutil-server/node_modules/
+!tools/bgutil-server/build/
+
+# Logs & Temporary files
+*.log
+.DS_Store
+Thumbs.db
+.idea/

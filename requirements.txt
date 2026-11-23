@@ -1,0 +1,124 @@
+# YouTube Shorts Automation Pipeline - All Phases
+# STRICTLY FREE / OPEN-SOURCE DEPENDENCIES
+
+# ============================================
+# Phase 1: Scraper & Listener
+# ============================================
+# yt-dlp: YouTube and many more platforms downloader
+yt-dlp>=2026.10.26
+
+# yt-dlp-ejs: JavaScript challenge solver required by yt-dlp to decipher
+# YouTube's signature parameter (needs a JS runtime: Node.js or Deno)
+yt-dlp-ejs>=0.8.0
+
+# bgutil-ytdlp-pot-provider: yt-dlp plugin that provides YouTube "Proof of
+# Origin" (PO) tokens. Modern YouTube rejects most downloads without one.
+# The matching local server lives in tools/bgutil-server (see README).
+bgutil-ytdlp-pot-provider>=2.0.2
+
+# faster-whisper: Faster transcription using Whisper models (local AI)
+faster-whisper>=1.0.0
+
+# ffmpeg-python: Python wrapper for FFmpeg (required by yt-dlp for merging)
+ffmpeg-python>=0.2.0
+
+# requests: HTTP client used for Groq cloud Whisper transcription API
+requests>=2.31.0
+
+# ============================================
+# Phase 2: The Brain (AI Clip Extraction)
+# ============================================
+# groq: Official Python client for Groq API
+groq>=0.4.0
+
+# ============================================
+# Phase 3: The Editor (Video Processing)
+# ============================================
+# moviepy: Video editing library for text overlays and compositing
+moviepy>=1.0.3
+
+# Imageio: Required by moviepy for video encoding
+imageio>=2.31.0
+imageio-ffmpeg>=0.4.9
+
+# numpy: Required by moviepy for video array operations
+numpy>=1.24.0
+
+# uharfbuzz & freetype-py: OpenType complex text shaping engine (HarfBuzz)
+# Essential for proper Devanagari (Hindi) conjuncts, ligatures and matra placement
+uharfbuzz>=0.40.0
+freetype-py>=2.4.0
+
+# ============================================
+# Phase 4: The Publisher (YouTube Upload)
+# ============================================
+# Google API client libraries for YouTube Data API v3
+# Note: These are NOT entirely free - YouTube Data API has quotas
+# and requires Google Cloud Platform account
+google-auth>=2.22.0
+google-auth-oauthlib>=1.2.0
+google-auth-httplib2>=0.2.0
+google-api-python-client>=2.115.0
+
+# ============================================
+# Installation Instructions
+# ============================================
+# 1. Install Python 3.9+ with pip
+# 2. Install dependencies:
+#    pip install -r requirements.txt
+#
+# For Phase 2, also set your Groq API key:
+#    export GROQ_API_KEY="your-api-key"
+#
+# For YouTube downloads you also need:
+# 1. Node.js (or Deno) - JS runtime for yt-dlp's challenge solver
+#    https://nodejs.org/
+# 2. The local PO Token server (auto-started by the app, but you can build it
+#    manually with):
+#      cd tools/bgutil-server && npm install && npx tsc
+#      node build/main.js --port 4416
+# 3. cookies.txt - export your logged-in YouTube cookies (Netscape format)
+#    into the project root. Required to get past YouTube's bot-check.
+#
+# For faster-whisper, install one of:
+#    - CPU: pip install torch --index-url https://download.pytorch.org/whl/cpu
+#    - CUDA 11.8: pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+#
+# For Phase 4 (YouTube Upload), you need:
+# 1. Google Cloud Project with YouTube Data API v3 enabled
+# 2. OAuth 2.0 Client ID credentials downloaded as client_secrets.json
+#    - Go to: https://console.cloud.google.com/apis/credentials
+#    - Create "Desktop" application type OAuth client
+#    - Download JSON and rename to client_secrets.json
+#
+# Model files will be downloaded automatically on first use:
+#   - tiny: ~75MB
+#   - small: ~1.2GB
+#   - medium: ~2.5GB
+#   - large-v3: ~3.5GB
+
+# ============================================
+# Phase 5: The Command Center (Web Dashboard)
+# ============================================
+# fastapi: Modern web framework for the backend API
+fastapi>=0.109.0
+
+# uvicorn: ASGI server to run FastAPI
+uvicorn[standard]>=0.27.0
+
+# jinja2: Template engine for HTML rendering
+jinja2>=3.1.0
+
+# python-multipart: Required for file uploads/form-data (FastAPI dependency)
+python-multipart>=0.0.6
+
+# ============================================
+# Web Dashboard Instructions
+# ============================================
+# Run the dashboard server:
+#   uvicorn app:app --reload --host 0.0.0.0 --port 8000
+#
+# Access the UI at: http://localhost:8000
+#
+# API Documentation: http://localhost:8000/docs
+# WebSocket endpoint: ws://localhost:8000/ws/status
